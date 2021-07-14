@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: AlignmentDirectional.center,
                       children: [
                         GestureDetector(
-                          onTap: !apiData.contains(da['id'])
+                          onTap: !apiData.contains(da['id']) && loader.isEmpty
                               ? () {
                                   _downloadImage(
                                     index,
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
     String? path;
     int? size;
     String? mimeType;
-//  for (var im in _mulitpleFiles) print('ddd$im');
+    for (var im in _mulitpleFiles) print('ddd$im');
     try {
       String? imageId;
 
