@@ -8,6 +8,8 @@ import 'package:path/path.dart' as Path;
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+import 'home_page.dart';
+
 class DownloadPage extends StatefulWidget {
   final List data;
   // final List waiting;
@@ -64,6 +66,8 @@ class _DownloadPageState extends State<DownloadPage> {
                     shrinkWrap: true,
                     itemCount: widget.data.length,
                     itemBuilder: (context, index) {
+                      FileName dataa = widget.data[index];
+
                       return Container(
                         width: MediaQuery.of(context).size.width,
                         height: 130,
@@ -74,7 +78,7 @@ class _DownloadPageState extends State<DownloadPage> {
                                 const BorderRadius.all(Radius.circular(15)),
                             color: Theme.of(context).primaryColor,
                             boxShadow: [
-                              BoxShadow(
+                              const BoxShadow(
                                 color: Colors.grey,
                                 offset: Offset(0.0, 1.0),
                                 blurRadius: 3.0,
@@ -87,13 +91,12 @@ class _DownloadPageState extends State<DownloadPage> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ImageBrowser(
-                                            image: widget.data[index])));
+                                        ImageBrowser(image: dataa.url)));
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15.0),
                                 child: Image.file(
-                                  widget.data[index],
+                                  dataa.url,
                                   height: 100.0,
                                   width: 100.0,
                                   fit: BoxFit.cover,
@@ -109,7 +112,7 @@ class _DownloadPageState extends State<DownloadPage> {
                                   children: [
                                     Container(
                                       child: Text(
-                                        'Name',
+                                        dataa.name,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),

@@ -150,7 +150,6 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  var isDownloading;
   Future<void> _downloadImage(
     var data_index,
     String api_id,
@@ -182,7 +181,6 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               _message = error.toString();
               _path = path ?? '';
-              isDownloading = 'error';
             });
           }
 
@@ -204,9 +202,6 @@ class _HomePageState extends State<HomePage> {
             outputMimeType: outputMimeType,
           );
         }
-        setState(() {
-          isDownloading = 'started';
-        });
       }
 
       if (imageId == null) {
@@ -240,11 +235,17 @@ class _HomePageState extends State<HomePage> {
       data[i] = temp;
       i++;
       value_waiting.remove(url);
-      value.add(File(path!));
+      value.add(FileName(name: fileName, url: File(path!)));
       if (!_mimeType.contains("video")) {
         _imageFile = File(path);
       }
       return;
     });
   }
+}
+
+class FileName {
+  var name;
+  File url;
+  FileName({required this.name, required this.url});
 }
